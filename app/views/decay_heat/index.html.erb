@@ -1,0 +1,15 @@
+<%#= javascript_include_tag "application" %>
+<%= form_tag({action: :calculate}, multipart: true) do %>
+  <%= file_field_tag 'text' %>
+  <%= submit_tag %>
+<% end %>
+
+<%# if @chart %>
+<div>
+  <div class="wsite-multicol">
+    <div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
+      <%#= high_chart("some_id", @chart) %>
+    </div>
+  </div>
+</div>
+<%# end %>
