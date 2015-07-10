@@ -12,14 +12,11 @@ class LinePlot
         data_array = []
 
         hash[:ts].each_index do |i|
-          # binding.pry
           data_array << [hash[:ts][i].to_f, hash[:p_p0][i].to_f]
         end
         f.series(type: 'line', name: "#{name}", data: data_array)
       end
       chart
     end
-
-    private
   end
 end

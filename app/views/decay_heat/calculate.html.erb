@@ -1,3 +1,9 @@
-<%= high_chart("some_id", @chart1) %>
-<%= high_chart("some_id", @chart2) %>
-<%= high_chart("some_id", @chart3) %>
+<% if @chart1 %>
+  <%= high_chart("some_id", @chart1) %>
+<% end %>
+<% if @chart2 %>
+  <%= high_chart("some_id", @chart2) %>
+<% end %>
+<% if @chart3 %>
+  <%= high_chart("some_id", @chart3) %>
+<% end %>
