@@ -5,9 +5,9 @@ class DecayHeatController < ApplicationController
   def calculate
     if hash = upload_to_hash(params[:text])
       output = DecayHeatWithNuclear.run(hash)
-      @chart1 = LinePlot.plot_line(output[:ans1979], 'ASN 1979')
-      @chart2 = LinePlot.plot_line(output[:ans1973], 'ASN 1973')
-      @chart3 = LinePlot.plot_line(output[:asb9_2], 'ASB 9-2')
+      @chart = LinePlot.plot_line(output)
+      # @chart2 = LinePlot.plot_line(output[:ans1973], 'ASN 1973')
+      # @chart3 = LinePlot.plot_line(output[:asb9_2], 'ASB 9-2')
     else
       render :index
     end
