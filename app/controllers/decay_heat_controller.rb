@@ -4,11 +4,19 @@ class DecayHeatController < ApplicationController
 
   def calculate
     if hash = upload_to_hash(params[:text]) || demo_data(params[:demo])
-      output = DecayHeatWithNuclear.run(hash)
-      @chart = LinePlot.plot_line(output, log: true)
+      @output = DecayHeatWithNuclear.run(hash)
+      @chart = LinePlot.plot_line(@output)
+      @option = { log: false }
     else
       render :index
     end
+  end
+
+  def xchange
+    @output = eval(params[:output])
+    @chart = LinePlot.plot_line(@output, log: params[:log].present?)
+    @option = { log: params[:log].present? }
+    render :calculate
   end
 
   private
