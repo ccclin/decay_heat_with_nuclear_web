@@ -21,8 +21,8 @@ class LinePlot
             data_array[key] << [hash[key][:ts][i].to_f, hash[key][:p_p0][i].to_f]
             data_array[:asb9_2_without_K] << [hash[key][:ts][i].to_f, hash[key][:p_p0_without_k][i].to_f] if hash[key][:p_p0_without_k][i]
           end
-          f.series(type: 'spline', name: "#{key}", data: data_array[key], dashStyle: 'longdash')
-          f.series(type: 'spline', name: "#{key}_without_k", data: data_array[key], dashStyle: 'longdash') unless data_array[:asb9_2_without_K].empty?
+          f.series(type: 'spline', name: "#{key}".upcase, data: data_array[key], dashStyle: 'longdash')
+          f.series(type: 'spline', name: "#{key}_without_k".upcase, data: data_array[key], dashStyle: 'longdash') unless data_array[:asb9_2_without_K].empty?
         end
       end
       chart

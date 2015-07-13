@@ -1,3 +1,15 @@
-<% if @chart %>
-  <%= high_chart("1", @chart) %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <div class="jumbotron">
+          <!-- <button class="btn btn-fab btn-raised btn-material-red"><i class="mdi-navigation-arrow-back"></i></button> -->
+          <%= link_to "", root_path, :class => "btn btn-fab btn-raised btn-material-red mdi-navigation-arrow-back" %>
+          <% if @chart %>
+          <%= high_chart("1", @chart) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
