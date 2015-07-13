@@ -5,9 +5,7 @@ class DecayHeatController < ApplicationController
   def calculate
     if hash = upload_to_hash(params[:text])
       output = DecayHeatWithNuclear.run(hash)
-      @chart = LinePlot.plot_line(output)
-      # @chart2 = LinePlot.plot_line(output[:ans1973], 'ASN 1973')
-      # @chart3 = LinePlot.plot_line(output[:asb9_2], 'ASB 9-2')
+      @chart = LinePlot.plot_line(output, log: true)
     else
       render :index
     end
@@ -26,6 +24,7 @@ class DecayHeatController < ApplicationController
         t0 << b.to_f
         power << c.to_f
       end
+      ts, t0 = ts.zip(t0).sort.transpose
       { ts: ts, t0: t0 }
     rescue
       false
