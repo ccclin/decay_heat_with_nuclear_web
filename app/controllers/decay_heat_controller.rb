@@ -3,14 +3,20 @@ class DecayHeatController < ApplicationController
   end
 
   def calculate
-    if hash = upload_to_hash(params[:text])
-      output = DecayHeatWithNuclear.run(hash)
-      @chart = LinePlot.plot_line(output)
-      # @chart2 = LinePlot.plot_line(output[:ans1973], 'ASN 1973')
-      # @chart3 = LinePlot.plot_line(output[:asb9_2], 'ASB 9-2')
+    if hash = upload_to_hash(params[:text]) || demo_data(params[:demo])
+      @output = DecayHeatWithNuclear.run(hash)
+      @chart = LinePlot.plot_line(@output)
+      @option = { log: false }
     else
       render :index
     end
+  end
+
+  def xchange
+    @output = eval(params[:output])
+    @chart = LinePlot.plot_line(@output, log: params[:log].present?)
+    @option = { log: params[:log].present? }
+    render :calculate
   end
 
   private
@@ -26,8 +32,21 @@ class DecayHeatController < ApplicationController
         t0 << b.to_f
         power << c.to_f
       end
+      ts, t0 = ts.zip(t0).sort.transpose
       { ts: ts, t0: t0 }
     rescue
+      false
+    end
+  end
+
+  def demo_data(option)
+    if option
+      ts = Array.new(20) { |i| (i + 1) * 365 * 24 * 3600 }
+      {
+        ts: ts,
+        t0: Array.new(ts.size) { 63 * 30 * 24 * 3600 }
+      }
+    else
       false
     end
   end

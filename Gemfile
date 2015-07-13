@@ -49,3 +49,6 @@ gem 'bearonrails'
 gem 'decay_heat_with_nuclear'
 
 gem 'lazy_high_charts'
+
+gem 'bootstrap-sass'
+gem 'bootstrap-material-design'

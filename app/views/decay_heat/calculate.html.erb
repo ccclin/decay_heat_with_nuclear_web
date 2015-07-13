@@ -1,3 +1,35 @@
-<% if @chart %>
-  <%= high_chart("1", @chart) %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
+        <div class="jumbotron">
+          <%= link_to "", root_path, :class => "btn btn-fab btn-raised btn-material-red mdi-navigation-arrow-back" %>
+          <% if @chart %>
+          <%= high_chart("1", @chart) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+          <%= form_tag({action: :xchange}, multipart: true) do %>
+          <fieldset>
+          <div class="form-group">
+              <div class="col-md-6 col-md-offset-3">
+              <% if @option[:log] %>
+                <%= hidden_field_tag 'log', nil %>
+                <%= hidden_field_tag 'output', @output %>
+                <%= button_tag  'linear', type: 'submit', class: 'btn btn-primary btn-block' %>
+              <% else %>
+                <%= hidden_field_tag 'log', true %>
+                <%= hidden_field_tag 'output', @output %>
+                <%= button_tag  'log', type: 'submit', class: 'btn btn-primary btn-block' %>
+              <% end %>
+              </div>
+          </div>
+          </fieldset>
+          <% end %>
+      </div>
+    </div>
+</div>
