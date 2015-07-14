@@ -17,12 +17,18 @@ class LinePlot
         hash.each_key do |key|
           data_array[key] = []
           data_array[:asb9_2_without_K] = []
-          hash[key][:ts].each_index do |i|
-            data_array[key] << [hash[key][:ts][i].to_f, hash[key][:p_p0][i].to_f]
-            data_array[:asb9_2_without_K] << [hash[key][:ts][i].to_f, hash[key][:p_p0_without_k][i].to_f] if hash[key][:p_p0_without_k][i]
+          hash_tiem = {
+            ts:             hash[key][:ts] || hash[key]['ts'],
+            p_p0:           hash[key][:p_p0] || hash[key]['p_p0'],
+            p_p0_without_k: hash[key][:p_p0_without_k] || hash[key]['p_p0_without_k'] || nil
+          }
+
+          hash_tiem[:ts].each_index do |i|
+            data_array[key] << [hash_tiem[:ts][i].to_f, hash_tiem[:p_p0][i].to_f]
+            data_array[:asb9_2_without_K] << [hash_tiem[:ts][i].to_f, hash_tiem[:p_p0_without_k][i].to_f] if hash_tiem[:p_p0_without_k][i]
           end
           f.series(type: 'spline', name: "#{key}".upcase, data: data_array[key], dashStyle: 'longdash')
-          f.series(type: 'spline', name: "#{key}_without_k".upcase, data: data_array[key], dashStyle: 'longdash') unless data_array[:asb9_2_without_K].empty?
+          f.series(type: 'spline', name: "#{key}_without_k".upcase, data: data_array[:asb9_2_without_K], dashStyle: 'longdash') unless data_array[:asb9_2_without_K].empty?
         end
       end
       chart
