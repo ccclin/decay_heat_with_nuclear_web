@@ -41,18 +41,18 @@ group :development, :test do
   gem 'spring'
   gem 'pry'
 
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+  # # Use sqlite3 as the database for Active Record
+  # gem 'sqlite3'
 end
 
-group :production, :test do
+group :production do
   # Use puma as the app server
   gem 'puma'
-
-  # Use postgres db
-  gem 'pg'
-  gem 'database_cleaner'
 end
+
+# Use postgres db
+gem 'pg'
+gem 'database_cleaner'
 
 gem 'bearonrails'
 
