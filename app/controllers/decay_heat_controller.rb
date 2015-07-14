@@ -1,11 +1,14 @@
+require 'json'
+
 class DecayHeatController < ApplicationController
   def index
   end
 
   def calculate
     if hash = upload_to_hash(params[:text]) || demo_data(params[:demo])
-      @output = DecayHeatWithNuclear.run(hash)
-      @chart = LinePlot.plot_line(@output)
+      output = DecayHeatWithNuclear.run(hash)
+      @output = output.to_json
+      @chart = LinePlot.plot_line(output)
       @option = { log: false }
     else
       render :index
@@ -13,10 +16,15 @@ class DecayHeatController < ApplicationController
   end
 
   def xchange
-    @output = eval(params[:output])
-    @chart = LinePlot.plot_line(@output, log: params[:log].present?)
-    @option = { log: params[:log].present? }
-    render :calculate
+    if output = check_hash(params[:output])
+      @output = output.to_json
+      log10_option = params[:log].present?
+      @chart = LinePlot.plot_line(output, log: log10_option)
+      @option = { log: log10_option }
+      render :calculate
+    else
+      render :index
+    end
   end
 
   private
@@ -46,6 +54,14 @@ class DecayHeatController < ApplicationController
         ts: ts,
         t0: Array.new(ts.size) { 63 * 30 * 24 * 3600 }
       }
+    else
+      false
+    end
+  end
+
+  def check_hash(params)
+    if JSON.parse(params).is_a?(Hash)
+      JSON.parse(params)
     else
       false
     end
