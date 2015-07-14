@@ -64,6 +64,10 @@ GEM
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     decay_heat_with_nuclear (0.0.2)
+    dotenv (2.0.2)
+    dotenv-rails (2.0.2)
+      dotenv (= 2.0.2)
+      railties (~> 4.0)
     erubis (2.7.0)
     execjs (2.5.2)
     globalid (0.3.5)
@@ -175,6 +179,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   database_cleaner
   decay_heat_with_nuclear
+  dotenv-rails
   jbuilder (~> 2.0)
   jquery-rails
   lazy_high_charts
