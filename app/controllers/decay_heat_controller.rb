@@ -6,9 +6,9 @@ class DecayHeatController < ApplicationController
 
   def calculate
     hash = upload_to_hash(params[:text]) || demo_data(params[:demo]) || nil
-    if output = decay_heat_calculate(hash) || check_hash(params[:output])
-      write_output(output) if params[:first]
-      @output = output.to_json
+    if output = decay_heat_calculate(hash) || check_hash(params[:output_id])
+      output_hash = OutputHash.find_or_create_by(answer: output.to_json)
+      @output_id = output_hash.id
       @chart = LinePlot.plot_line(output, log: params[:log].present?)
       @option = { log: params[:log].present? }
     else
@@ -17,6 +17,7 @@ class DecayHeatController < ApplicationController
   end
 
   def download
+    write_output(check_hash(params[:id]))
     send_file("#{Rails.root}/public/uploads/temp.txt")
   end
 
@@ -50,9 +51,9 @@ class DecayHeatController < ApplicationController
     end
   end
 
-  def check_hash(params)
-    if JSON.parse(params).is_a?(Hash)
-      JSON.parse(params)
+  def check_hash(id)
+    if output_hash = OutputHash.find_by(id: id.to_i)
+      JSON.parse(output_hash.answer)
     else
       false
     end
@@ -67,13 +68,13 @@ class DecayHeatController < ApplicationController
   def write_output(hash)
     File.open(Rails.root.join('public', 'uploads', 'temp.txt'), 'wb') do |file|
       file.printf("ts\tANS-1979\tANS-1973\tASB9-2\tASB9-2withoutK\n")
-      hash[:ans1979][:ts].each_index do |i|
+      hash['ans1979']['ts'].each_index do |i|
         file.printf("%.1f\t%.12f\t%.12f\t%.12f\t%.12f\n",
-                    hash[:ans1979][:ts][i],
-                    hash[:ans1979][:p_p0][i],
-                    hash[:ans1973][:p_p0][i],
-                    hash[:asb9_2][:p_p0][i],
-                    hash[:asb9_2][:p_p0_without_k][i]
+                    hash['ans1979']['ts'][i],
+                    hash['ans1979']['p_p0'][i],
+                    hash['ans1973']['p_p0'][i],
+                    hash['asb9_2']['p_p0'][i],
+                    hash['asb9_2']['p_p0_without_k'][i]
                    )
       end
     end
