@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="page-header">
+        <div class="jumbotron">
+          <div class="row">
+            <div class="col-md-2 col-md-offset-1">
+              <p class="lead text-center">ts</p>
+              <% @output['ans1979']['ts'].each_index do |i| %>
+              <p class="lead text-center"><%= '%.0f' %@output['ans1979']['ts'][i] %></p>
+              <% end %>
+            </div>
+            <div class="col-md-2">
+              <p class="lead text-center">ANS-1979</p>
+              <% @output['ans1979']['p_p0'].each_index do |i| %>
+              <p class="lead text-center"><%= '%.3E' %@output['ans1979']['p_p0'][i] %></p>
+              <% end %>
+            </div>
+            <div class="col-md-2">
+              <p class="lead text-center">ANS-1973</p>
+              <% @output['ans1973']['p_p0'].each_index do |i| %>
+              <p class="lead text-center"><%= '%.3E' %@output['ans1973']['p_p0'][i] %></p>
+              <% end %>
+            </div>
+            <div class="col-md-2">
+              <p class="lead text-center">ASB9-2</p>
+              <% @output['asb9_2']['p_p0'].each_index do |i| %>
+              <p class="lead text-center"><%= '%.3E' %@output['asb9_2']['p_p0'][i] %></p>
+              <% end %>
+            </div>
+            <div class="col-md-2">
+              <p class="lead text-center">ASB9-2withoutK</p>
+              <% @output['asb9_2']['p_p0_without_k'].each_index do |i| %>
+              <p class="lead text-center"><%= '%.3E' %@output['asb9_2']['p_p0_without_k'][i] %></p>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-md-4 col-md-offset-4 text-center">
+            <%= link_to "", calculate_path(output_id: @output_id), :class => "btn btn-fab btn-raised btn-material-red mdi-navigation-arrow-back" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
