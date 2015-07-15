@@ -12,11 +12,10 @@
           <%= form_tag({action: :calculate}, multipart: true) do %>
           <fieldset>
           <div class="form-group">
-              <label class="col-md-2 control-label text-center">File</label>
-              <div class="col-md-10">
+              <div class="col-md-10 col-md-offset-1">
                 <%= file_field_tag 'text', accept: '.txt', class: 'form-control floating-label file' %>
               </div>
-              <div class="col-md-6 col-md-offset-3">
+              <div class="col-md-8 col-md-offset-2">
                 <%= button_tag  'Upload', type: 'submit', class: 'btn btn-primary btn-block' %>
               </div>
           </div>
@@ -36,7 +35,7 @@
           <%= form_tag({action: :calculate}, multipart: true) do %>
           <fieldset>
           <div class="form-group">
-              <div class="col-md-6 col-md-offset-3">
+              <div class="col-md-8 col-md-offset-2">
                 <%= hidden_field_tag 'demo', value: true %>
                 <%= hidden_field_tag 'first', true %>
                 <%= button_tag  'Demo', type: 'submit', class: 'btn btn-primary btn-block' %>
