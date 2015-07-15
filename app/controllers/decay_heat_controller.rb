@@ -16,9 +16,14 @@ class DecayHeatController < ApplicationController
     end
   end
 
-  def download
-    write_output(check_hash(params[:id]))
-    send_file("#{Rails.root}/public/uploads/temp.txt")
+  # def download
+  #   write_output(check_hash(params[:id]))
+  #   send_file("#{Rails.root}/public/uploads/temp.txt")
+  # end
+
+  def show
+    @output = check_hash(params[:id])
+    @output_id = params[:id]
   end
 
   private
@@ -65,18 +70,18 @@ class DecayHeatController < ApplicationController
     false
   end
 
-  def write_output(hash)
-    File.open(Rails.root.join('public', 'uploads', 'temp.txt'), 'wb') do |file|
-      file.printf("ts\tANS-1979\tANS-1973\tASB9-2\tASB9-2withoutK\n")
-      hash['ans1979']['ts'].each_index do |i|
-        file.printf("%.1f\t%.12f\t%.12f\t%.12f\t%.12f\n",
-                    hash['ans1979']['ts'][i],
-                    hash['ans1979']['p_p0'][i],
-                    hash['ans1973']['p_p0'][i],
-                    hash['asb9_2']['p_p0'][i],
-                    hash['asb9_2']['p_p0_without_k'][i]
-                   )
-      end
-    end
-  end
+  # def write_output(hash)
+  #   File.open(Rails.root.join('public', 'uploads', 'temp.txt'), 'wb') do |file|
+  #     file.printf("ts\tANS-1979\tANS-1973\tASB9-2\tASB9-2withoutK\n")
+  #     hash['ans1979']['ts'].each_index do |i|
+  #       file.printf("%.1f\t%.12f\t%.12f\t%.12f\t%.12f\n",
+  #                   hash['ans1979']['ts'][i],
+  #                   hash['ans1979']['p_p0'][i],
+  #                   hash['ans1973']['p_p0'][i],
+  #                   hash['asb9_2']['p_p0'][i],
+  #                   hash['asb9_2']['p_p0_without_k'][i]
+  #                  )
+  #     end
+  #   end
+  # end
 end
