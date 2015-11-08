@@ -16,10 +16,10 @@ class DecayHeatController < ApplicationController
     end
   end
 
-  # def download
-  #   write_output(check_hash(params[:id]))
-  #   send_file("#{Rails.root}/public/uploads/temp.txt")
-  # end
+  def download
+    write_output(check_hash(params[:id]))
+    send_file("#{Rails.root}/public/uploads/temp.txt")
+  end
 
   def show
     @output = check_hash(params[:id])
