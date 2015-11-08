@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ccclin / decay_heat_with_nuclear_web.svg)](https://travis-ci.org/ccclin / decay_heat_with_nuclear_web)
+[![Build Status](https://travis-ci.org/ccclin/decay_heat_with_nuclear_web.svg)](https://travis-ci.org/ccclin/decay_heat_with_nuclear_web)
 
 == README
 
