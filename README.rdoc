@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ccclin / decay_heat_with_nuclear_web.svg)](https://travis-ci.org/ccclin / decay_heat_with_nuclear_web)
+
 == README
 
 This README would normally document whatever steps are necessary to get the
