@@ -1,6 +1,8 @@
-[![Build Status](https://travis-ci.org/ccclin/decay_heat_with_nuclear_web.svg?branch=master)](https://travis-ci.org/ccclin/decay_heat_with_nuclear_web)
-
 == README
+
+[![Build Status](https://travis-ci.org/ccclin/decay_heat_with_nuclear_web.svg?branch=master)](https://travis-ci.org/ccclin/decay_heat_with_nuclear_web)
+[![Code Climate](https://codeclimate.com/github/ccclin/decay_heat_with_nuclear_web/badges/gpa.svg)](https://codeclimate.com/github/ccclin/decay_heat_with_nuclear_web)
+[![Test Coverage](https://codeclimate.com/github/ccclin/decay_heat_with_nuclear_web/badges/coverage.svg)](https://codeclimate.com/github/ccclin/decay_heat_with_nuclear_web/coverage)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
